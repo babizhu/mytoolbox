@@ -19,7 +19,7 @@ CREATE USER `wangwei`@`127.0.0.1` IDENTIFIED BY 'passowrd';GRANT ALL ON *.* TO `
 在/Users/liukun/docker/mysql/conf.d中加上
 > [mysqld]<br>
 skip-host-cache<br>
-skip-name-resolve
+skip-name-resolve<br>
 default_authentication_plugin = mysql_native_password
 
 
@@ -33,4 +33,12 @@ docker rm $(docker ps -a -q)
 * 重启容器（mysql）
 ```
 docker restart mysql
+```
+* 进入容器（mysql）
+```
+docker exec -it mysql /bin/bash
+```
+* 查看日志（mysql）
+```
+docker logs -f mysql
 ```
