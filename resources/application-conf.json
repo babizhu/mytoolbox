@@ -1,0 +1,24 @@
+{
+  "server": {
+    "port": 8080
+  },
+  "db":{
+//    "jdbcUrl":"jdbc:mysql://192.168.31.1:3306/quant_trade?useSSL=true&&useUnicode=true&characterEncoding=utf8",
+//    "user":"liulaoye",
+//    "password":"liulaoye",
+//    "maximumPoolSize":30,
+//    "host":"192.168.31.1",
+    "host":"localhost",
+    "port" : 3306,
+    "maxPoolSize" : 10,
+    "username" : "liulaoye",
+    "password" : "liulaoye",
+    "database" : "toolbox",
+    "charset" : "UTF-8"
+  },
+  "mongo":{
+    "uri":"mongodb://localhost:27017/?serverSelectionTimeoutMS=500",
+    "db":"quant_trader"
+  }
+
+}
