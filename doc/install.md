@@ -9,6 +9,10 @@ docker run --name mysql -e MYSQL_ROOT_PASSWORD=liulaoye -d -i -p 3306:3306 -v /U
 ```
 create user 'liulaoye'@'%' identified with mysql_native_password by 'liulaoye'
 ```
+* 赋权
+```
+CREATE USER `wangwei`@`127.0.0.1` IDENTIFIED BY 'passowrd';GRANT ALL ON *.* TO `wangwei`@`127.0.0.1` WITH GRANT OPTION;
+```
 
 * 修改mysql缺省验证方式
 
