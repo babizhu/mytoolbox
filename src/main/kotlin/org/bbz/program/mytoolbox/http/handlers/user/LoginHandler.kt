@@ -1,14 +1,12 @@
-package com.bbz.outsource.uaes.oa.kt.http.handlers.user
+package org.bbz.program.mytoolbox.http.handlers.user
 
 
 import org.bbz.program.mytoolbox.consts.ErrorCode
-import com.bbz.outsource.uaes.oa.kt.db.LoginDataProvider
-import com.bbz.outsource.uaes.oa.kt.http.handlers.AbstractHandler
 import org.bbz.program.mytoolbox.http.handlers.endSuccess
 
 import io.vertx.core.json.JsonArray
 import io.vertx.ext.auth.jwt.JWTAuth
-import io.vertx.ext.auth.jwt.JWTOptions
+import io.vertx.ext.jwt.JWTOptions
 import io.vertx.ext.sql.SQLClient
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
@@ -18,6 +16,8 @@ import org.bbz.program.mytoolbox.consts.ErrorCodeException
 import org.bbz.program.mytoolbox.consts.JsonConsts
 import org.bbz.program.mytoolbox.consts.RSAKey
 import org.bbz.program.mytoolbox.coroutineHandler
+import org.bbz.program.mytoolbox.db.LoginDataProvider
+import org.bbz.program.mytoolbox.http.handlers.AbstractHandler
 import org.bbz.program.mytoolbox.util.Base64Utils
 import org.bbz.program.mytoolbox.util.CustomHashStrategy
 import org.bbz.program.mytoolbox.util.RSAUtils
@@ -42,12 +42,12 @@ class LoginHandler(private val jwtAuthProvider: JWTAuth, dbClient: SQLClient) : 
                 ?: throw ErrorCodeException(ErrorCode.PARAMETER_ERROR, "username is null")
         val password = userJson.getString(JsonConsts.USER_PASSWORD)
                 ?: throw ErrorCodeException(ErrorCode.PARAMETER_ERROR, "password is null")
-        var param = JsonArray().add(username)
-        var resultSet = dataProvider.login(param)
+        val param = JsonArray().add(username)
+        val resultSet = dataProvider.login(param)
         val p = decodeRsaPassword(password)
         val errorCode = checkUserLogin(resultSet.results, p)
         if (errorCode.isSuccess) {
-            var roles = dataProvider.queryRoles(param)
+            val roles = dataProvider.queryRoles(param)
             val token = jwtAuthProvider.generateToken(
                     json {
                         obj(

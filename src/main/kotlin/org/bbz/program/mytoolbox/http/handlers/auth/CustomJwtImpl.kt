@@ -1,7 +1,6 @@
 package org.bbz.program.mytoolbox.http.handlers.auth
 
 import org.bbz.program.mytoolbox.consts.ErrorCode
-import com.bbz.outsource.uaes.oa.kt.db.LoginDataProvider
 import org.bbz.program.mytoolbox.http.handlers.endFail
 import com.google.common.reflect.ClassPath
 import io.vertx.core.Handler
@@ -12,6 +11,7 @@ import io.vertx.ext.auth.User
 import io.vertx.ext.auth.jwt.JWTAuth
 import io.vertx.ext.sql.SQLClient
 import io.vertx.ext.web.RoutingContext
+import org.bbz.program.mytoolbox.db.LoginDataProvider
 import org.bbz.program.mytoolbox.http.handlers.auth.anno.RequirePermissions
 import org.bbz.program.mytoolbox.http.handlers.auth.anno.RequireRoles
 import org.slf4j.LoggerFactory
@@ -61,7 +61,7 @@ class CustomJwtImpl(private val authProvider: JWTAuth) : Handler<RoutingContext>
                 }
 
             } else {
-                log.warn("JWT decode failure", res.cause())
+                logger.warn("JWT decode failure", res.cause())
                 context.response().endFail(ErrorCode.USER_NOT_LOGIN, "JWT decode failure")
             }
         }
@@ -71,8 +71,8 @@ class CustomJwtImpl(private val authProvider: JWTAuth) : Handler<RoutingContext>
     private fun authorise(user: User, ctx: RoutingContext): Boolean {
         //    log.debug("检测权限,用户的权限：" + user.principal().getJsonArray("roles"));
         val uri = ctx.request().uri()
-        log.debug("访问的地址：$uri")
-        log.debug("需要的权限： ${URI_PERMISSIONS_MAP[uri]}")
+        logger.debug("访问的地址：$uri")
+        logger.debug("需要的权限： ${URI_PERMISSIONS_MAP[uri]}")
         return doIsPermitted(user.principal().getString("roles"), URI_PERMISSIONS_MAP[uri])
     }
 
@@ -103,7 +103,7 @@ class CustomJwtImpl(private val authProvider: JWTAuth) : Handler<RoutingContext>
 
     companion object {
 
-        private val log = LoggerFactory.getLogger(CustomJwtImpl::class.java)
+        private val logger = LoggerFactory.getLogger(CustomJwtImpl::class.java)
         private const val HANDLER_PACKAGE_BASE = "org.bbz.stock.quanttrade.http.handlers"
         /**
          * 仅供内部使用，原则上初始化之后不允许修改，否则可能造成多线程竞争，如果需要修改，可考虑采用vertx.sharedData()
@@ -130,7 +130,7 @@ class CustomJwtImpl(private val authProvider: JWTAuth) : Handler<RoutingContext>
                 e.printStackTrace()
             }
 
-            log.info(URI_PERMISSIONS_MAP.toString())
+            logger.info(URI_PERMISSIONS_MAP.toString())
 
         }
 
@@ -191,9 +191,7 @@ class CustomJwtImpl(private val authProvider: JWTAuth) : Handler<RoutingContext>
             val dataProvider = LoginDataProvider(dbClient)
             val queryRolesPermission = dataProvider.queryRolesPermission()
             queryRolesPermission.rows.map { ROLE_PERMISSIONS_MAP.put(it.getString("role"), string2Set(it.getString("perm"))) }
-            println(ROLE_PERMISSIONS_MAP)
-
-
+            logger.info(ROLE_PERMISSIONS_MAP.toString())
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.bbz.outsource.uaes.oa.kt.db
+package org.bbz.program.mytoolbox.db
 
 import io.vertx.ext.sql.SQLClient
 

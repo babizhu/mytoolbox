@@ -1,8 +1,7 @@
 package org.bbz.program.mytoolbox.http
 
 
-import com.bbz.outsource.uaes.oa.kt.http.handlers.user.LoginHandler
-import com.bbz.outsource.uaes.oa.kt.http.handlers.user.UserHandler
+
 import io.vertx.core.Handler
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.web.Router
@@ -12,9 +11,11 @@ import io.vertx.ext.web.handler.StaticHandler
 import org.bbz.program.mytoolbox.MainVerticle
 import org.bbz.program.mytoolbox.consts.Consts
 import org.bbz.program.mytoolbox.consts.ErrorCodeException
-import org.bbz.program.mytoolbox.http.handlers.TemplateHandler
+import org.bbz.program.mytoolbox.http.handlers.template.TemplateHandler
 import org.bbz.program.mytoolbox.http.handlers.auth.CustomJwtImpl
 import org.bbz.program.mytoolbox.http.handlers.endFail
+import org.bbz.program.mytoolbox.http.handlers.user.LoginHandler
+import org.bbz.program.mytoolbox.http.handlers.user.UserHandler
 
 fun MainVerticle.createHttpServer(conf:JsonObject) {
     val logger = MainVerticle.logger

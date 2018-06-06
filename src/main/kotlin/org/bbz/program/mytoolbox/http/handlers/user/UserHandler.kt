@@ -1,7 +1,5 @@
-package com.bbz.outsource.uaes.oa.kt.http.handlers.user
+package org.bbz.program.mytoolbox.http.handlers.user
 
-import com.bbz.outsource.uaes.oa.kt.db.UserDataProvider
-import com.bbz.outsource.uaes.oa.kt.http.handlers.AbstractHandler
 import io.vertx.ext.sql.SQLClient
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
@@ -10,6 +8,8 @@ import io.vertx.kotlin.core.json.array
 import io.vertx.kotlin.core.json.json
 import org.bbz.program.mytoolbox.consts.JsonConsts
 import org.bbz.program.mytoolbox.coroutineHandler
+import org.bbz.program.mytoolbox.db.UserDataProvider
+import org.bbz.program.mytoolbox.http.handlers.AbstractHandler
 import org.bbz.program.mytoolbox.http.handlers.auth.CustomJwtImpl
 import org.bbz.program.mytoolbox.http.handlers.auth.anno.RequirePermissions
 import org.bbz.program.mytoolbox.http.handlers.endSuccess

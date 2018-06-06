@@ -1,7 +1,5 @@
-package org.bbz.program.mytoolbox.http.handlers
+package org.bbz.program.mytoolbox.http.handlers.template
 
-import com.bbz.outsource.uaes.oa.kt.db.TemplateDataProvider
-import com.bbz.outsource.uaes.oa.kt.http.handlers.AbstractHandler
 import io.vertx.ext.sql.SQLClient
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
@@ -11,6 +9,8 @@ import io.vertx.kotlin.core.json.json
 import io.vertx.kotlin.core.json.obj
 import org.bbz.program.mytoolbox.consts.JsonConsts
 import org.bbz.program.mytoolbox.coroutineHandler
+import org.bbz.program.mytoolbox.db.TemplateDataProvider
+import org.bbz.program.mytoolbox.http.handlers.AbstractHandler
 import org.bbz.program.mytoolbox.http.handlers.auth.CustomJwtImpl
 import org.bbz.program.mytoolbox.http.handlers.auth.anno.RequirePermissions
 import org.bbz.program.mytoolbox.http.handlers.endSuccess
@@ -61,7 +61,7 @@ class TemplateHandler(dbClient: SQLClient) : AbstractHandler() {
                 .cryptPassword(userJson.getString(JsonConsts.USER_PASSWORD), salt)
         json { array(userJson.getValue("username"), salt, cryptPassword) }
 
-        var result = dataProvider.create(json {
+        val result = dataProvider.create(json {
             array(
                     userJson.getValue("username"),
                     salt,

@@ -1,5 +1,6 @@
-package com.bbz.outsource.uaes.oa.kt.db
+package org.bbz.program.mytoolbox.db
 
+import org.bbz.program.mytoolbox.db.AbstractDataProvider
 import io.vertx.core.json.JsonArray
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.sql.ResultSet
@@ -38,7 +39,6 @@ class TemplateDataProvider(dbClient: SQLClient) : AbstractDataProvider(dbClient)
             sql = sql.substring(0, sql.length - 4)
         }
 
-        println(sql)
         return queryWithParams(dbClient,
                 sql,
                 conditionArray)
