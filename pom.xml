@@ -12,8 +12,8 @@
     <argLine>-Dfile.encoding=UTF-8</argLine>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <vertx.version>3.5.1</vertx.version>
-    <kotlin.version>1.2.31</kotlin.version>
+    <vertx.version>3.5.2</vertx.version>
+    <kotlin.version>1.2.50</kotlin.version>
   </properties>
 
   <dependencies>
