@@ -16,7 +16,7 @@ GRANT ALL ON *.* TO `liulaoye`@`$` WITH GRANT OPTION;
 
 * 修改mysql缺省验证方式
 
-在/Users/liukun/docker/mysql/conf.d中加上
+在/Users/liukun/docker/mysql/conf.d/docker.conf中加上
 > [mysqld]<br>
 skip-host-cache<br>
 skip-name-resolve<br>
